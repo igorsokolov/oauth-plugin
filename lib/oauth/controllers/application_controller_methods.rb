@@ -49,7 +49,7 @@ module OAuth
             true
           elsif !(@strategies & env["oauth.strategies"].to_a).empty?
             puts "env strategies : #{env['oauth.strategies']}"
-            puts "token : #{token}"
+            puts "token : #{token.inspect}"
             puts "user : #{token.user.inspect}" if token
             @controller.send :current_user=, token.user if token
             true
