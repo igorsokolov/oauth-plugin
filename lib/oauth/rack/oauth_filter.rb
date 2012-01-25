@@ -21,6 +21,8 @@ module OAuth
 
       def call(env)
         request = ::Rack::Request.new(env)
+        puts "Request  : #{request.token}"
+        puts "Request token : #{request.token}"
         env["oauth_plugin"] = true
         strategies = []
         if token_string = oauth2_token(request)
