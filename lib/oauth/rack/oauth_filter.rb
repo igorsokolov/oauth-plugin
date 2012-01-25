@@ -40,6 +40,7 @@ module OAuth
             client_application.token_callback_url = request_proxy.oauth_callback if request_proxy.oauth_callback
             oauth_token = nil
             puts "!! request_proxy.token : #{request_proxy.token.inspect} "
+            puts "!! client_application : #{client_application.inspect} "
 
             if request_proxy.token
               oauth_token = client_application.tokens.where(:token => request_proxy.token).first
