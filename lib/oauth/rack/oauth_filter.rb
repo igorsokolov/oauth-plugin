@@ -46,7 +46,7 @@ module OAuth
                 oauth_token.provided_oauth_verifier = request_proxy.oauth_verifier
               end
               env["oauth.token_candidate"] = oauth_token
-              puts "!! oauth_token : #{oauth_token} "
+              puts "!! oauth_token : #{oauth_token.inspect} "
             end
             # return the token secret and the consumer secret
             [(oauth_token.nil? ? nil : oauth_token.secret), (client_application.nil? ? nil : client_application.secret)]
