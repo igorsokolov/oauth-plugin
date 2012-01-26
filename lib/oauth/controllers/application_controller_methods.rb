@@ -29,10 +29,6 @@ module OAuth
         end
 
         def filter(controller)
-          puts "---------------------- allow? from filter"
-          puts "Controller : #{controller}"
-          puts "Strategies : #{@strategies.inspect}"
-
           Authenticator.new(controller,@strategies).allow?
         end
       end
@@ -48,9 +44,6 @@ module OAuth
           if @strategies.include?(:interactive) && interactive
             true
           elsif !(@strategies & env["oauth.strategies"].to_a).empty?
-            puts "env strategies : #{env['oauth.strategies']}"
-            puts "token : #{token.inspect}"
-            puts "user : #{token.user.inspect}" if token
             @controller.send :current_user=, token.user if token
             true
           else

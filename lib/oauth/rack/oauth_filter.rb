@@ -21,8 +21,6 @@ module OAuth
 
       def call(env)
         request = ::Rack::Request.new(env)
-        puts "Request  : #{request.token}"
-        puts "Request token : #{request.token}"
         env["oauth_plugin"] = true
         strategies = []
         if token_string = oauth2_token(request)
@@ -41,8 +39,6 @@ module OAuth
             # Store this temporarily in client_application object for use in request token generation
             client_application.token_callback_url = request_proxy.oauth_callback if request_proxy.oauth_callback
             oauth_token = nil
-            puts "!! request_proxy.token : #{request_proxy.token.inspect} "
-            puts "!! client_application : #{client_application.inspect} "
 
             if request_proxy.token
               oauth_token = client_application.tokens.where(:token => request_proxy.token).first
@@ -81,7 +77,6 @@ module OAuth
           signature = OAuth::Signature.build(request, options, &block)
           return false unless OauthNonce.remember(signature.request.nonce, signature.request.timestamp)
           value = signature.verify
-          puts "!!!! Signature value : #{value}"
           value
         rescue OAuth::Signature::UnknownSignatureMethod => e
           false
